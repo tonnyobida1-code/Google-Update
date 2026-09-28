@@ -10,6 +10,10 @@ app.use(express.json());
 // Serve website files from the public folder
 app.use(express.static(path.join(__dirname, "public")));
 
+// Home page
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Payment endpoint
 app.post("/api/payment", (req, res) => {
@@ -31,7 +35,9 @@ app.post("/api/payment", (req, res) => {
         success: true,
         message: "Payment request received successfully."
     });
+});
 
 // Start server
-app.listen(PORT, () => {
-    console.log(`Google Update is running at http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Google Update is running on port ${PORT}`);
+});

@@ -1,21 +1,15 @@
-const express = require("express");
+﻿const express = require("express");
 const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Allow the server to receive JSON data
 app.use(express.json());
 
-// Serve website files from the public folder
-app.use(express.static(path.join(__dirname, "public")));
-
-// Home page
 app.get("/", (req, res) => {
-    res.sendFile("index.html", { root: path.join(__dirname, "public") });
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Payment endpoint
 app.post("/api/payment", (req, res) => {
     const { name, phone, amount } = req.body;
 
@@ -37,7 +31,6 @@ app.post("/api/payment", (req, res) => {
     });
 });
 
-// Start server
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Google Update is running on port ${PORT}`);
 });
